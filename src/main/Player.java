@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Player {
     private Card[] hand;
     private int handSize;
@@ -52,5 +54,26 @@ public class Player {
 
     public void addPoints(int points) {
         this.points += points;
+    }
+
+    public int getHandSize() { 
+        return handSize;
+    }
+
+    public Card deleteCard(int cardNum) { 
+        for (int i = 0; i < hand.length; i++) {
+            if (hand[i] != null && hand[i].getValue() == cardNum) {
+                Card temp = hand[i];
+                hand[i] = null;
+                handSize--;
+                if (hand[i + 1] != null) {
+                    for (int j = i + 1; j < hand.length; j++) {
+                        hand[j - 1] = hand[j];
+                    }
+                }
+                return temp;
+            }
+        }
+        return null;
     }
 }

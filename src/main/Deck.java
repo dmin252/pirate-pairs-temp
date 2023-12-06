@@ -21,8 +21,7 @@ public class Deck {
         Random rand = new Random();
 
         for (int value = 1; value <= 10; value++) {
-            int numCards = value;
-            for (int i = 0; i < numCards; i++) {
+            for (int i = 0; i < value; i++) {
                 cards[index++] = new Card(value);
             }
         }
@@ -44,13 +43,13 @@ public class Deck {
 
     public Card drawCard() {
         if (deckSize == 0) {
-            return null; // Deck is empty
+            return null;
         }
 
         int randomIndex = new Random().nextInt(deckSize);
         Card drawnCard = cards[randomIndex];
         cards[randomIndex] = cards[deckSize - 1];
-        cards[deckSize - 1] = null; // Clear the drawn card from the deck
+        cards[deckSize - 1] = null;
         deckSize--;
 
         return drawnCard;
@@ -63,5 +62,17 @@ public class Deck {
     public Card[] getDiscardPile() {
         return Arrays.copyOf(discardPile, discardSize);
     }
-}
 
+    public int getDeckSize() {
+        return deckSize;
+    }
+
+    public void DiscardToDeck() {
+        for (int i = 0; i < discardPile.length; i ++) {
+            if (discardPile[i] != null) {
+                cards[i] = discardPile[i];
+            }
+        }
+        shuffleDeck();
+    } 
+}
