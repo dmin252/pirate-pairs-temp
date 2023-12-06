@@ -17,6 +17,7 @@ public class Deck {
     }
 
     private void initializeDeck() {
+        //setting up the cards
         int index = 0;
         Random rand = new Random();
 
@@ -28,6 +29,7 @@ public class Deck {
     }
 
     private void shuffleDeck() {
+        //I swap cards to shuffle
         Random rand = new Random();
         for (int i = deckSize - 1; i > 0; i--) {
             int j = rand.nextInt(i + 1);
@@ -36,6 +38,7 @@ public class Deck {
     }
 
     private void swap(Card[] arr, int i, int j) {
+        //swap used for shuffling
         Card temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
@@ -68,6 +71,7 @@ public class Deck {
     }
 
     public void DiscardToDeck() {
+        //if you used all cards, you have to shuffle the discarded cards
         for (int i = 0; i < discardPile.length; i ++) {
             if (discardPile[i] != null) {
                 cards[i] = discardPile[i];
