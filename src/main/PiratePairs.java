@@ -21,6 +21,7 @@ public class PiratePairs {
         int eachTurn = 1;   
 
         while (!done) {
+            //play until the game over
             Player currentPlayer = players[currentPlayerIndex];
             System.out.println("Player " + (currentPlayerIndex + 1) + "'s turn");
 
@@ -29,7 +30,7 @@ public class PiratePairs {
             int choice = 1;
 
             if (currentPlayer.getHandSize() > 0) { 
-
+            //my strategy for folding. You first have to check if player has a card
                 for (int i = 0; i < currentPlayer.getHand().length; i++) {
                     Card card = currentPlayer.getHand()[i];
                     if (card != null && card.getValue() >= losingScore - currentPlayer.getPoints()) {
@@ -51,10 +52,12 @@ public class PiratePairs {
                 totalCard += player.getHandSize(); 
             }
             if (totalCard == 0) { 
+            //draw a card in the beginning
                 choice = 1; 
             }
 
             if (eachTurn <= numPlayers || currentPlayer.getHand().length == 0) {    
+            //draw if someone gets a pair or fold
                 choice = 1;     
             }                   
 
@@ -65,6 +68,7 @@ public class PiratePairs {
                     System.out.println("Player " + (currentPlayerIndex + 1) + " drew a card: " + drawnCard.getValue());
 
                     if (currentPlayer.hasPair(drawnCard)) {
+                        //checking if player drew a pair
                         int points = drawnCard.getValue();
                         System.out.println("Pair found! " + "Player " + (currentPlayerIndex + 1) + " gain " + points + " points.");
                         currentPlayer.addPoints(points);
@@ -100,11 +104,13 @@ public class PiratePairs {
             System.out.println("Player " + (currentPlayerIndex + 1) + "'s current score is " + currentPlayer.getPoints());
             int playerPoints = currentPlayer.getPoints();
             if (playerPoints > losingScore) {
+                //game is over
                 System.out.println("Player " + (currentPlayerIndex + 1) + " has exceeded the losing score. Game over!");
                 done = true;
                 break;
             }
             if (deck.getDeckSize() == 0) {
+
                 System.out.println("There is no more card. Discard card to Deck"); // ADD
                 deck.DiscardToDeck();
             } 
